@@ -23,7 +23,7 @@ $result = mysql_query("SELECT * FROM leido WHERE oepLEIDO LIKE '%$leido%'", $con
 //Verifico si ya fue cargado el OEP leido
 if ($row = mysql_fetch_array($result))
 	{	
-	echo "<script>alert('Este OEP ya fue leido');</script>";
+	echo "<script>alert('Este OEP ya fue leido.');</script>";
 	echo "<script>location.href ='http://www.inventario.inv:8000/leeInv.php';</script>";	
 	}
 else
