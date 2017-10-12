@@ -1,0 +1,74 @@
+body
+	{
+
+	background-color: rgba(230,80,180,0.6);
+	background-image: url("LogoOCA.png");
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+
+h1
+	{
+	margin-top: 90px;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 55px;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+h3
+	{
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	text-align: left;
+	font-weight: bold;
+}
+
+h5
+	{
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-align: justify;
+	font-weight: bold;
+}
+
+
+.button
+	{
+	background-color: gray;
+	border-style: solid;
+	border-width: 5px;
+	border-color: black;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
+	margin: 40px 45%;
+	cursor: pointer;
+	transition: all 0.5s;
+	border-radius: 12px;
+	
+}	
+
+.button:hover 
+	{
+	background-color: #e7e7e7;
+}
+
+p.hora	
+	{
+	font-size: 12px;
+	font-family: arial, helvetica, sans-serif;
+	color: black;
+	text-align: right;
+	text-position: top;
+	font-weight: bold;
+	}
