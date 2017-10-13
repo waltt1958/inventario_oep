@@ -5,14 +5,36 @@
 <body>
 <p class="hora">
 <?php
+	setlocale(LC_TIME, 'spanish');
+	date_default_timezone_set ('America/Argentina/Buenos_Aires');		
+	echo strftime ("%A, %d de %B de %Y - %H:%M hs.");
 
-setlocale(LC_TIME, 'spanish');
-date_default_timezone_set ('America/Argentina/Buenos_Aires');		
-echo strftime ("%A, %d de %B de %Y - %H:%M hs.");
+	//conexion a BBDD
+	$con = mysql_connect("localhost","root","") or die ("Error de conexión");
+	mysql_select_db("inventario",$con) or die ("Error de conexión a BBDD");
+	
+	$insertLEIDO = "SELECT oepLEIDO FROM leido";
+	$cuentaLEIDO = mysql_query($insertLEIDO,$con);
+	while ($filaLEIDO = mysql_fetch_array($cuentaLEIDO))
+	{
+		$leido = $filaLEIDO['oepLEIDO'];
+		
+		$insertOEP = "SELECT numero FROM oep";
+		$cuentaOEP = mysql_query($insertOEP, $con);
+		while ($filaOEP = mysql_fetch_array($cuentaOEP))
+		{
+			$oep = $filaOEP['numero'];
+		
+			if ($leido == $oep)
+			{				
+				mysql_query("UPDATE oep SET controlOEP= '1' Where numero='$oep'", $con);
+				mysql_query("UPDATE leido SET controlLEIDO= '1' Where oepLEIDO='$leido'",$con);
+			}
+		}
+	}
 
-//echo strftime("Hoy es %A y son las %H:%M");
-//echo strftime("Hoy es %A y son las %H:%M");
-//echo date("l, dS \of F Y H:i:s");
+	//cierra conexion
+	mysql_close($con);
 ?>
 
 <h1> INVENTARIO OEP</H1>

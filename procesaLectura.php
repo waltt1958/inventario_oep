@@ -18,7 +18,7 @@ mysql_select_db("inventario",$con) or die ("Error de conexión a BBDD");
 $leido= $_POST['leeInv'];
 
 //busco el OEP leido si ya està en la BBDD del inventario
-$result = mysql_query("SELECT * FROM leido WHERE oepLEIDO LIKE '%$leido%'", $con);
+$result = mysql_query("SELECT * FROM leido WHERE oepLEIDO LIKE '$leido%'", $con);
 
 //Verifico si ya fue cargado el OEP leido
 if ($row = mysql_fetch_array($result))
