@@ -65,25 +65,17 @@
 	}
 
 	echo "</table>";
-
+	echo "<br>";
+	echo "<br>";
+	echo "<hr size='3' color='black'>";
 	//mostrar todos los paquetes que fueron leidos en el sector pero que no figuran en el stock de oep
 	echo "<br>";
 	echo "<br>";
 	echo "<h2>PAQUETES LEIDOS EN EL SECTOR Y QUE NO FIGURAN EN EL STOCK DEL SISTEMA OEP</h2>";
 	echo "<br><br>";
 	
-//	echo "<table align='center' width='30%' border='2' bordercolor='black'>";
-	//echo "<tr align='center' bgcolor='green'><th>NRO OEP QUE FUE LEIDO EN EL SECTOR</th></tr>";
-
 	$insertLEIDO = "SELECT oepLEIDO FROM leido";
 	$cuentaLEIDO= mysql_query($insertLEIDO, $con);
-//	while ($filaLEIDO = mysql_fetch_array($cuentaLEIDO))
-//	{
-//		echo "<tr><td align='center'>$filaLEIDO[0]</td></tr>";
-//	}
-
-//	echo "</table>";
-	
 	
 	if ($filaLEIDO = mysql_fetch_array($cuentaLEIDO))
 	{ 

@@ -22,7 +22,8 @@ echo strftime ("%A, %d de %B de %Y - %H:%M hs.");
 <H3>VISUALIZAR O GENERAR ARCHIVO EXCEL CON DIFERENCIAS</H3>
 
 <table width="80%">
-<tr><td align="center"><input type="text" name="verDIF" onclick="location.href='diferencias.php';" class="button" value="VER DIFERENCIAS"></td><td align="center"><input type="text" name="generarExc" onclick="location.href='difExcel.php';" class="button" value="EXCEL CON DIFERENCIAS"></td></tr>
+<tr><td align="center"><input type="text" name="verDIF" onclick="location.href='diferencias.php';" class="button" value="VER DIFERENCIAS"></td>
+<td align="center"><input type="text" name="generarExc" onclick="location.href='difExcel.php';" class="button" value="EXCEL CON DIFERENCIAS"></td></tr>
 </table>
 <input type="text" name="inicio" onclick="location.href='index.php';" class="button" value="VOLVER AL INICIO">
 

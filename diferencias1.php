@@ -65,24 +65,32 @@
 	}
 
 	echo "</table>";
-
+	echo "<br>";
+	echo "<br>";
+	echo "<hr size='3' color='black'>";
 	//mostrar todos los paquetes que fueron leidos en el sector pero que no figuran en el stock de oep
 	echo "<br>";
 	echo "<br>";
 	echo "<h2>PAQUETES LEIDOS EN EL SECTOR Y QUE NO FIGURAN EN EL STOCK DEL SISTEMA OEP</h2>";
 	echo "<br><br>";
 	
-	echo "<table align='center' width='30%' border='2' bordercolor='black'>";
-	echo "<tr align='center' bgcolor='green'><th>NRO OEP QUE FUE LEIDO EN EL SECTOR</th></tr>";
-
 	$insertLEIDO = "SELECT oepLEIDO FROM leido";
 	$cuentaLEIDO= mysql_query($insertLEIDO, $con);
-	while ($filaLEIDO = mysql_fetch_array($cuentaLEIDO))
-	{
-		echo "<tr><td align='center'>$filaLEIDO[0]</td></tr>";
+	
+	if ($filaLEIDO = mysql_fetch_array($cuentaLEIDO))
+	{ 
+		echo "<table align='center' width='30%' border='2' bordercolor='black'>";
+		echo "<tr align='center' bgcolor='green'><th>NRO OEP QUE FUE LEIDO EN EL SECTOR</th></tr>";
+		do 	{ 
+			echo "<tr><td align='center'>$filaLEIDO[0]</td></tr>"; 
+			} while ($filaLEIDO = mysql_fetch_array($cuentaLEIDO)); 
+			echo "</table>"; 
+	} 
+	else 
+	{ 
+	echo "<p align='center'><strong>NO SE HA LEIDO NINGUNA PAQUETE EN EL SECTOR</strong></p>"; 
 	}
-
-	echo "</table>";
+	
 	//cierra conexion
 	mysql_close($con);
 
@@ -92,6 +100,7 @@
 	<tr><td align="center"><input type="text" name="verDIF" onclick="location.href='difExcel.php';" class="button" value="GENERAR ARCHIVO"></td>
 	<td align="center"><input type='text' name='imprimir' class='button' onclick='window.print();' value='IMPRIMIR DIFERENCIAS'></td></tr>
 	</table>
+	<input type="text" name="inicio" onclick="location.href='index.php';" class="button" value="VOLVER AL INICIO">
 	
 	
 

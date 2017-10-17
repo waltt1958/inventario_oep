@@ -36,9 +36,6 @@ mysql_select_db("inventario",$con) or die ("Error de conexión a BBDD");
 //cierra conexion
 mysql_close($con);
 
-session_start();
-
-
 ?>
 
 <h1> INVENTARIO OEP</h1>
@@ -48,13 +45,7 @@ session_start();
 <form align="center" name="fleer"  action="procesaLectura.php" method="post">
 <p><font size="20%"><b>Ingrese el nro de OEP</b></font><br><br>
 <INPUT TYPE="TEXT" NAME="leeInv" onblur="validar()" OnKeyPress="if (event.keyCode==32) event.returnValue= false;" maxlength="19" autofocus >
-<br>
-<br>
-<table	align="center" width="30%" border="1" bordercolor="black">
-<tr><td align="center"><strong>ANTERIOR OEP LEIDO:   </strong><?php echo $_SESSION["anterior"];?></strong></td></tr>
-</table>
 </form>
-
 <br>
 <hr size="3" color="black">
 <br>

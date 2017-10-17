@@ -88,7 +88,7 @@ header("content-disposition: attachment;filename=diferencias inventario.xls");
 		echo "<table align='center' width='30%' border='2' bordercolor='black'>";
 		echo "<tr align='center' bgcolor='green'><th>NRO OEP QUE FUE LEIDO EN EL SECTOR</th></tr>";
 		do 	{ 
-			echo "<tr><td align='center'>$filaLEIDO[0]</td></tr>"; 
+			echo "<tr><td align='center'>'$filaLEIDO[0]'</td></tr>"; 
 			} while ($filaLEIDO = mysql_fetch_array($cuentaLEIDO)); 
 			echo "</table>"; 
 	} 
