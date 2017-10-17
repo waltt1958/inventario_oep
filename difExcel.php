@@ -1,3 +1,11 @@
+<?php
+//Exportar datos de php a Excel
+header("Content-Type: application/vnd.ms-excel");
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("content-disposition: attachment;filename=diferencias inventario.xls");
+?>
+
 <html>
 <head>
 <link rel="stylesheet" title="estilos.css" type="text/css" href="estilos.css">
@@ -61,7 +69,7 @@
 	$cuentaOEP= mysql_query($insertOEP, $con);
 	while ($filaOEP = mysql_fetch_array($cuentaOEP))
 	{
-		echo "<tr><td>$filaOEP[0]</td><td>$filaOEP[1]</td><td>$filaOEP[2]</td><td>$filaOEP[3]</td></tr>";
+		echo "<tr><td>'$filaOEP[0]'</td><td>$filaOEP[1]</td><td>$filaOEP[2]</td><td>$filaOEP[3]</td></tr>";
 	}
 
 	echo "</table>";
@@ -71,19 +79,9 @@
 	echo "<br>";
 	echo "<h2>PAQUETES LEIDOS EN EL SECTOR Y QUE NO FIGURAN EN EL STOCK DEL SISTEMA OEP</h2>";
 	echo "<br><br>";
-	
-//	echo "<table align='center' width='30%' border='2' bordercolor='black'>";
-	//echo "<tr align='center' bgcolor='green'><th>NRO OEP QUE FUE LEIDO EN EL SECTOR</th></tr>";
 
 	$insertLEIDO = "SELECT oepLEIDO FROM leido";
 	$cuentaLEIDO= mysql_query($insertLEIDO, $con);
-//	while ($filaLEIDO = mysql_fetch_array($cuentaLEIDO))
-//	{
-//		echo "<tr><td align='center'>$filaLEIDO[0]</td></tr>";
-//	}
-
-//	echo "</table>";
-	
 	
 	if ($filaLEIDO = mysql_fetch_array($cuentaLEIDO))
 	{ 
@@ -99,18 +97,10 @@
 	echo "<p align='center'><strong>NO SE HA LEIDO NINGUNA PAQUETE EN EL SECTOR</strong></p>"; 
 	}
 	
+	
 	//cierra conexion
 	mysql_close($con);
 
 ?>
-	
-	<table width="80%">
-	<tr><td align="center"><input type="text" name="verDIF" onclick="location.href='difExcel.php';" class="button" value="GENERAR ARCHIVO"></td>
-	<td align="center"><input type='text' name='imprimir' class='button' onclick='window.print();' value='IMPRIMIR DIFERENCIAS'></td></tr>
-	</table>
-	<input type="text" name="inicio" onclick="location.href='index.php';" class="button" value="VOLVER AL INICIO">
-	
-	
-
 </body >
 </html>

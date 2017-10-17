@@ -20,7 +20,7 @@ echo strftime ("%A, %d de %B de %Y - %H:%M hs.");
    <br>
    <br>
    <br>
-   <input name="enviar" type="submit" value="Importar" />
+   <input name="enviar" type="submit" value="IMPORTAR ARCHIVO" />
 </form>
 
 
