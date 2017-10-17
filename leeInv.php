@@ -51,7 +51,16 @@ session_start();
 <br>
 <br>
 <table	align="center" width="30%" border="1" bordercolor="black">
-<tr><td align="center"><strong>ANTERIOR OEP LEIDO:   </strong><?php echo $_SESSION["anterior"];?></strong></td></tr>
+<tr><td align="center"><strong>ANTERIOR OEP LEIDO:   </strong>
+<?php 
+
+if (isset($_SESSION["anterior"]))
+{ 
+echo $_SESSION["anterior"];
+}
+	
+?>
+</strong></td></tr>
 </table>
 </form>
 

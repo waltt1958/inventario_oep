@@ -11,7 +11,7 @@
 
 	//conexion a BBDD
 	$con = mysql_connect("localhost","root","") or die ("Error de conexión");
-	mysql_select_db("inventario",$con) or die ("Error de conexión a BBDD");
+	mysql_select_db("inventa",$con) or die "<p align='center'>('Error de conexión a BBDD')</p>";
 	
 	$insertLEIDO = "SELECT oepLEIDO FROM leido";
 	$cuentaLEIDO = mysql_query($insertLEIDO,$con);
