@@ -13,13 +13,15 @@ else
 {
 //conexion a BBDD
 $con=mysql_connect("localhost","root","") or die ("Error de conexión");
-mysql_select_db("inventario",$con) or die ("Error de conexión a BBDD");
+mysql_select_db("inventario",$con) or die ('<center><table bgcolor="#999999# border="2"><tr><td>Error de conexión a BBDD</td></tr>
+	<tr><td>Consulte con el administrador del sistema</td><tr></table><input type="text" onclick=location.href="index.php" class="button" value="VOLVER AL INICIO"></center>');
 
 Session_start();
 
 $leido= $_POST['leeInv'];
 
 $_SESSION["anterior"]= $_POST['leeInv'];
+
 
 //busco el OEP leido si ya està en la BBDD del inventario
 $result = mysql_query("SELECT * FROM leido WHERE oepLEIDO LIKE '$leido%'", $con);

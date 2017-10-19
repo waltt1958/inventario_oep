@@ -11,7 +11,8 @@
 
 	//conexion a BBDD
 	$con = mysql_connect("localhost","root","") or die ("Error de conexión");
-	mysql_select_db("inventario",$con) or die ("Error de conexión a BBDD");
+	mysql_select_db("inventario",$con) or die ('<center><table bgcolor="#999999# border="2"><tr><td>Error de conexión a BBDD</td></tr>
+	<tr><td>Consulte con el administrador del sistema</td><tr></table><input type="text" onclick=location.href="index.php" class="button" value="VOLVER AL INICIO"></center>');
 	
 	$insertLEIDO = "SELECT oepLEIDO FROM leido";
 	$cuentaLEIDO = mysql_query($insertLEIDO,$con);
@@ -57,7 +58,7 @@
 	echo "<table align='center' width='100%' border='2' bordercolor='black'>";
 	echo "<tr align='center' bgcolor='green'><th>NRO OEP</th><th>NOMBRE</th><th>CALLE</th><th>LOCALIDAD</th></tr>";
 
-	$insertOEP = "SELECT numero, nombre, calle, localidad FROM oep";
+	$insertOEP = "SELECT numero, nombre, calle, localidad FROM oep Where controlOEP<> '1'";
 	$cuentaOEP= mysql_query($insertOEP, $con);
 	while ($filaOEP = mysql_fetch_array($cuentaOEP))
 	{
@@ -74,7 +75,7 @@
 	echo "<h2>PAQUETES LEIDOS EN EL SECTOR Y QUE NO FIGURAN EN EL STOCK DEL SISTEMA OEP</h2>";
 	echo "<br><br>";
 	
-	$insertLEIDO = "SELECT oepLEIDO FROM leido";
+	$insertLEIDO = "SELECT oepLEIDO FROM leido Where controlLEIDO<> '1'";
 	$cuentaLEIDO= mysql_query($insertLEIDO, $con);
 	
 	if ($filaLEIDO = mysql_fetch_array($cuentaLEIDO))
@@ -88,7 +89,7 @@
 	} 
 	else 
 	{ 
-	echo "<p align='center'><strong>NO SE HA LEIDO NINGUNA PAQUETE EN EL SECTOR</strong></p>"; 
+	echo "<p align='center'><strong>NO SE HA LEIDO NINGUNA PAQUETE EN EL SECTOR QUE NO FIGURE STOCK</strong></p>"; 
 	}
 	
 	//cierra conexion
