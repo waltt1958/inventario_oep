@@ -1,3 +1,11 @@
+<?php
+//Exportar datos de php a Excel
+header("Content-Type: application/vnd.ms-excel");
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("content-disposition: attachment;filename=diferencias inventario.xls");
+?>
+
 <html>
 <head>
 <link rel="stylesheet" title="estilos.css" type="text/css" href="estilos.css">
@@ -47,9 +55,14 @@
 <H3>DIFERENCIAS EN LA LECTURA DEL INVENTARIO</H3>
 
 <?php
+
+	// se inicia para generar el PDF. Retiene la información en el buffer
+	ob_start();
+
 	//conexion a BBDD
 	$con = mysql_connect("localhost","root","") or die ("Error de conexión");
-	mysql_select_db("inventario",$con) or die ("Error de conexión a BBDD");
+	mysql_select_db("inventario",$con) or die ('<center><table bgcolor="#999999# border="2"><tr><td>Error de conexión a BBDD</td></tr>
+	<tr><td>Consulte con el administrador del sistema</td><tr></table><input type="text" onclick=location.href="index.php" class="button" value="VOLVER AL INICIO"></center>');
 	
 	//mostrar la base de OEP con todos los paquetes que no fueron leidos en el sector
 	
@@ -62,20 +75,18 @@
 	$cuentaOEP= mysql_query($insertOEP, $con);
 	while ($filaOEP = mysql_fetch_array($cuentaOEP))
 	{
-		echo "<tr><td>$filaOEP[0]</td><td>$filaOEP[1]</td><td>$filaOEP[2]</td><td>$filaOEP[3]</td></tr>";
+		echo "<tr><td>'$filaOEP[0]'</td><td>$filaOEP[1]</td><td>$filaOEP[2]</td><td>$filaOEP[3]</td></tr>";
 	}
 
 	echo "</table>";
-	echo "<br>";
-	echo "<br>";
-	echo "<hr size='3' color='black'>";
+
 	//mostrar todos los paquetes que fueron leidos en el sector pero que no figuran en el stock de oep
 	echo "<br>";
 	echo "<br>";
 	echo "<h2>PAQUETES LEIDOS EN EL SECTOR Y QUE NO FIGURAN EN EL STOCK DEL SISTEMA OEP</h2>";
 	echo "<br><br>";
-	
-	$insertLEIDO = "SELECT oepLEIDO FROM leido Where controlLEIDO<> '1'";
+
+	$insertLEIDO = "SELECT oepLEIDO FROM leido Where controlLEIDO <> '1'";
 	$cuentaLEIDO= mysql_query($insertLEIDO, $con);
 	
 	if ($filaLEIDO = mysql_fetch_array($cuentaLEIDO))
@@ -83,28 +94,28 @@
 		echo "<table align='center' width='30%' border='2' bordercolor='black'>";
 		echo "<tr align='center' bgcolor='green'><th>NRO OEP QUE FUE LEIDO EN EL SECTOR</th></tr>";
 		do 	{ 
-			echo "<tr><td align='center'>$filaLEIDO[0]</td></tr>"; 
+			echo "<tr><td align='center'>'$filaLEIDO[0]'</td></tr>"; 
 			} while ($filaLEIDO = mysql_fetch_array($cuentaLEIDO)); 
 			echo "</table>"; 
 	} 
 	else 
 	{ 
-	echo "<p align='center'><strong>NO SE HA LEIDO NINGUN PAQUETE EN EL SECTOR QUE NO FIGURE STOCK</strong></p>"; 
+	echo "<p align='center'><strong>NO SE HA LEIDO NINGUN PAQUETE EN EL SECTOR</strong></p>"; 
 	}
+	
+	// Para generar el PDF
+	require_once("dompdf/dompdf_config.inc.php");
+	$dompdf = new DOMPDF();
+	$dompdf->load_html(ob_get_clean());
+	$dompdf->render();
+	$pdf = $dompdf->output();
+	$filename= "diferenciaPDF ".date('d-m-y H.i.s').'.pdf';
+	file_put_contents($filename, $pdf);
+	$dompdf->stream($filename);
 	
 	//cierra conexion
 	mysql_close($con);
 
 ?>
-	
-	<table width="80%">
-	<tr><td align="center"><input type="text" name="verDIF" onclick="location.href='difExcel.php';" class="button" value="GENERAR EXCEL"></td>
-	<td align="center"><input type='text' name='imprimir' class='button' onclick='window.print();' value='IMPRIMIR DIFERENCIAS'></td>
-	<td align="center"><input type="text" name="verPDF" onclick="location.href='difPDF.php';" class="button" value="GENERAR PDF"></tr>
-	</table>
-	<input type="text" name="inicio" onclick="location.href='index.php';" class="button" value="VOLVER AL INICIO">
-	
-	
-
 </body >
 </html>
