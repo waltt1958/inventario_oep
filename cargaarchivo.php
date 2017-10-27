@@ -20,9 +20,9 @@ echo strftime ("%A, %d de %B de %Y - %H:%M hs.");
    <br>
    <br>
    <br>
-   <input name="enviar" type="submit" value="IMPORTAR ARCHIVO" />
-</form>
+   <input name="enviar" type="submit" onclick="alert('ESPERE QUE CARGUE EL ARCHIVO. LE AVISARÁ CUANDO TERMINE');">
 
+</form>
 
 </body >
 </html>

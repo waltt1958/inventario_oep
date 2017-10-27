@@ -1,8 +1,9 @@
-<html>
+﻿<html>
 <head>
 <link rel="stylesheet" title="estilos.css" type="text/css" href="estilos.css">
 </head>
 <body>
+
 <p class="hora">
 
 <?php
@@ -34,7 +35,7 @@ $archivotmp = $_FILES['archivo']['tmp_name'];
 //verifico si el archivo tiene registros 
 if (!empty($tamanio))
 {
-	
+
 //cargamos el archivo
 $lineas = file($archivotmp);
 
@@ -43,7 +44,9 @@ if ($lineas>0)
 {
 //inicializamos variable a 0, esto nos ayudará a indicarle que no lea la primera línea
 $i=0;
- 
+
+
+
 //Recorremos el bucle para leer línea por línea
 foreach ($lineas as $linea_num => $linea)
 { 
@@ -91,6 +94,7 @@ foreach ($lineas as $linea_num => $linea)
 $cuenta= $i-1;
 echo "<br><br><br><br><h1>La cantidad de registros ingresados es de: $cuenta </h1>";
 echo "<br><br><br><br><input type='text' name='carga' onclick=location.href='carga.php'; class='button' value='CARGA INVENTARIO'>";
+
 }
 }
 else
@@ -102,7 +106,6 @@ echo "<br><br><br><br><input type='text' name='errorArchivo' onclick=location.hr
 mysql_close($con);
 
 ?>
-
 
 </body>
 </html>
