@@ -1,8 +1,22 @@
 ﻿<html>
 <head>
 <link rel="stylesheet" title="estilos.css" type="text/css" href="estilos.css">
+
+   <script>
+      window.onload = detectarCarga;
+      function detectarCarga(){
+         document.getElementById("carga").style.display="none";
+      }
+    </script>
+    
 </head>
 <body>
+
+
+
+<div id="carga">
+  <img src="loading.gif"/>
+</div>
 
 <p class="hora">
 

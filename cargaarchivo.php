@@ -127,7 +127,7 @@ else
    <br>
    <br>
    <br>
-   <input name="enviar" type="submit" onclick="alert('ESPERE QUE CARGUE EL ARCHIVO. LE AVISARÁ CUANDO TERMINE');">
+   <input name="enviar" class="button" type="submit" onclick="alert('ESPERE QUE CARGUE EL ARCHIVO. LE AVISARÁ CUANDO TERMINE');">
 
 </form>
 
