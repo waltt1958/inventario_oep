@@ -99,7 +99,7 @@ echo "<br><br><br><br><input type='text' name='carga' onclick=location.href='car
 }
 else
 {
-echo "<br><br><br><br><h1>No eligió ningún archivo</h1>";
+echo "<br><br><br><br><h1>No seleccionó ningún archivo para realizar el inventario</h1>";
 echo "<br><br><br><br><input type='text' name='errorArchivo' onclick=location.href='cargaarchivo.php'; class='button' value='CARGAR ARCHIVO'>";
 }
 //cierra conexion
