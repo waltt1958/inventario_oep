@@ -43,8 +43,13 @@ $archivotmp = $_FILES['archivo']['tmp_name'];
 if (!empty($tamanio))
 {
 
+
+
+
 //cargamos el archivo
 $lineas = file($archivotmp);
+
+
 
 //verifico si fue cargado el archivo con registros
 if ($lineas>0)
@@ -52,7 +57,30 @@ if ($lineas>0)
 //inicializamos variable a 0, esto nos ayudará a indicarle que no lea la primera línea
 $i=0;
 
+	echo "<br><br><br><br>";
+	echo "<h3><p align='center' id='unp'>Se está cargando el archivo seleccionado.....Espere</p></h3>";
+    echo "<div id='undiv' class='barra'>";
+    echo "<div class='progreso'><div class='porcentaje'></div></div>";
+    echo "</div>";
 
+//Genero la barra de avance
+
+@ob_flush();
+flush();
+$total = 200;
+for ($j = 0; $j <= $total; $j = $j + 10):
+    $actual = $j;
+    $porcentaje = round(($actual / $total) * 100, 0);
+    ?>
+    <script type="text/javascript">
+        document.getElementsByClassName("progreso")[0].style.width = "<?php echo $porcentaje; ?>%";
+        document.getElementsByClassName("porcentaje")[0].innerHTML = "<?php echo $porcentaje; ?>%";
+    </script>
+    <?php
+   @ob_flush();
+	flush();
+    usleep(500000);
+endfor;
 
 //Recorremos el bucle para leer línea por línea
 foreach ($lineas as $linea_num => $linea)
@@ -95,12 +123,16 @@ foreach ($lineas as $linea_num => $linea)
    /*Cuando pase la primera pasada se incrementará nuestro valor y a la siguiente pasada ya 
    entraremos en la condición, de esta manera conseguimos que no lea la primera línea.*/
    $i++;
+   
+
    //cerramos bucle
 }
-
-$cuenta= $i-1;
-echo "<br><br><br><br><h1>La cantidad de registros ingresados es de: $cuenta </h1>";
-echo "<br><br><br><br><input type='text' name='carga' onclick=location.href='carga.php'; class='button' value='CARGA INVENTARIO'>";
+	echo "<script>var ddiv = document.getElementById('undiv'); var pp = document.getElementById('unp')</script>";
+	echo "<script>ddiv.style.display= 'none';pp.style.display= 'none'</script>";
+	
+	$cuenta= $i-1;
+	echo "<br><br><br><br><h1>La cantidad de registros ingresados es de: $cuenta </h1>";
+	echo "<br><br><br><br><input type='text' name='carga' onclick=location.href='carga.php'; class='button' value='CARGA INVENTARIO'>";
 
 }
 }
@@ -127,7 +159,7 @@ else
    <br>
    <br>
    <br>
-   <input name="enviar" class="button" type="submit" onclick="alert('ESPERE QUE CARGUE EL ARCHIVO. LE AVISARÁ CUANDO TERMINE');">
+   <input name="enviar" class="button" type="submit">
 
 </form>
 
