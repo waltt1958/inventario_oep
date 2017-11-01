@@ -96,7 +96,7 @@ header("content-disposition: attachment;filename=diferencias inventario.xls");
 	} 
 	else 
 	{ 
-	echo "<p align='center'><strong>NO SE HA LEIDO NINGUN PAQUETE EN EL SECTOR</strong></p>"; 
+	echo "<p align='center'><strong>NO SE HA LEIDO NINGUN PAQUETE EN EL SECTOR QUE NO SE ENCUENTRE EN STOCK</strong></p>"; 
 	}
 	
 	

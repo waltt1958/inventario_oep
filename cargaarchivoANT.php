@@ -36,15 +36,20 @@ mysql_query($borraLEIDO, $con);
 $tipo = $_FILES['archivo']['type'];
 
 $tamanio = $_FILES['archivo']['size'];
-
+ 
 $archivotmp = $_FILES['archivo']['tmp_name'];
 
 //verifico si el archivo tiene registros 
 if (!empty($tamanio))
 {
 
+
+
+
 //cargamos el archivo
 $lineas = file($archivotmp);
+
+
 
 //verifico si fue cargado el archivo con registros
 if ($lineas>0)
@@ -52,15 +57,31 @@ if ($lineas>0)
 //inicializamos variable a 0, esto nos ayudará a indicarle que no lea la primera línea
 $i=0;
 
-	echo "<br><br><br><br><br><br><br>";
+	echo "<br><br><br><br>";
 	echo "<h3><p align='center' id='unp'>Se está cargando el archivo seleccionado.....Espere</p></h3>";
     echo "<div id='undiv' class='barra'>";
     echo "<div class='progreso'><div class='porcentaje'></div></div>";
     echo "</div>";
-	
-	$j = 0;
-	$total = count($lineas);
-	
+
+//Genero la barra de avance
+
+@ob_flush();
+flush();
+$total = 200;
+for ($j = 0; $j <= $total; $j = $j + 10):
+    $actual = $j;
+    $porcentaje = round(($actual / $total) * 100, 0);
+    ?>
+    <script type="text/javascript">
+        document.getElementsByClassName("progreso")[0].style.width = "<?php echo $porcentaje; ?>%";
+        document.getElementsByClassName("porcentaje")[0].innerHTML = "<?php echo $porcentaje; ?>%";
+    </script>
+    <?php
+   @ob_flush();
+	flush();
+    usleep(500000);
+endfor;
+
 //Recorremos el bucle para leer línea por línea
 foreach ($lineas as $linea_num => $linea)
 { 
@@ -95,24 +116,7 @@ foreach ($lineas as $linea_num => $linea)
        //guardamos en base de datos la línea leida
        mysql_query("INSERT INTO oep(diasVisita, idPieza, numero, diasRestantes, siglaCli, operativa, fecha, nombre, calle, localidad, provincia, nada, final) 
 	   VALUES('$diasVisita', '$idPieza', $numero, '$diasRestantes', '$siglaCli', '$operativa', '$fecha', '$nombre', '$calle', '$localidad', '$provincia', 0, 0)",$con);
-
-	   //Genero la barra de avance
-
-		@ob_flush();
-		flush();
-		$j = $j + 1;
-		$actual = $j;
-		$porcentaje = round(($actual / $total) * 100, 0);
-		?>
-		<script type="text/javascript">
-			document.getElementsByClassName("progreso")[0].style.width = "<?php echo $porcentaje; ?>%";
-			document.getElementsByClassName("porcentaje")[0].innerHTML = "<?php echo $porcentaje; ?>%";
-		</script>
-		<?php
-
-		@ob_flush();
-		flush();
-		
+	   
        //cerramos condición
    }
  
@@ -120,35 +124,29 @@ foreach ($lineas as $linea_num => $linea)
    entraremos en la condición, de esta manera conseguimos que no lea la primera línea.*/
    $i++;
    
-   //cerramos bucle
-}  
 
+   //cerramos bucle
+}
 	echo "<script>var ddiv = document.getElementById('undiv'); var pp = document.getElementById('unp')</script>";
 	echo "<script>ddiv.style.display= 'none';pp.style.display= 'none'</script>";
 	
 	$cuenta= $i-1;
-
-	echo "<br><br><h1>La cantidad de registros ingresados es de: $cuenta </h1>";
-	echo "<br><br><br><input type='text' name='carga' onclick=location.href='carga.php'; class='button' value='CARGA INVENTARIO'>";
-
-}
+	echo "<br><br><br><br><h1>La cantidad de registros ingresados es de: $cuenta </h1>";
+	echo "<br><br><br><br><input type='text' name='carga' onclick=location.href='carga.php'; class='button' value='CARGA INVENTARIO'>";
 
 }
-
+}
 else
-
 {
 echo "<br><br><br><br><h1>No eligió ningún archivo</h1>";
 echo "<br><br><br><br><input type='text' name='errorArchivo' onclick=location.href='cargaarchivo.php'; class='button' value='CARGAR ARCHIVO'>";
 }
-
 //cierra conexion
 mysql_close($con);
 
 }
 
 else
-
 {
 ?>
 
