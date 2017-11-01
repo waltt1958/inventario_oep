@@ -43,21 +43,25 @@ session_start();
 ?>
 
 <h1> INVENTARIO OEP</h1>
-<br>
+
 <hr size="3" color="black">
-<br>
+
 <form align="center" name="fleer"  action="procesaLectura.php" method="post">
-<p><font size="20%"><b>Ingrese el nro de OEP</b></font><br><br>
-<INPUT TYPE="TEXT" NAME="leeInv" onblur="validar()" OnKeyPress="if (event.keyCode==32) event.returnValue= false;" maxlength="19" autofocus >
+<p><font size="6"><b>Ingrese el nro de OEP</b></font><br><br>
+<INPUT TYPE="TEXT" class="forma" style="width:330px;height: 40px; font-size:30px; border: 3px solid;bordercolor: black" NAME="leeInv" onblur="validar()" OnKeyPress="if (event.keyCode==32) event.returnValue= false;" maxlength="19" autofocus >
 <br>
 <br>
-<table	align="center" width="30%" border="1" bordercolor="black">
-<tr><td align="center"><strong>ANTERIOR OEP LEIDO:   </strong>
+<br>
+<br>
+<table	align="center" width="30%" border="3" bordercolor="black">
+<tr><td align="center"><strong><font size="5"><u> ANTERIOR OEP LEIDO:   </u></font><br>
 <?php 
 
 if (isset($_SESSION["anterior"]))
 { 
-echo $_SESSION["anterior"];
+$anteriorOEP = $_SESSION["anterior"];
+
+echo "<br><font size='5'><b>$anteriorOEP</b></font>";
 }
 	
 ?>
@@ -65,12 +69,8 @@ echo $_SESSION["anterior"];
 </table>
 </form>
 
-<br>
 <hr size="3" color="black">
-<br>
-
 <H3>VISUALIZAR DIFERENCIAS DE INVENTARIO</H3>
-
 <input type="text" name="verDIF" onclick="location.href='diferencias.php';" class="button" value="VER DIFERENCIAS">
 </body>
 </html>
