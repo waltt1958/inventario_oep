@@ -1,9 +1,5 @@
 <?php
-//Exportar datos de php a Excel
-header("Content-Type: application/vnd.ms-excel");
-header("Expires: 0");
-header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-header("content-disposition: attachment;filename=diferencias inventario.xls");
+//Exportar datos de php a PDF
 ?>
 
 <html>
@@ -13,6 +9,7 @@ header("content-disposition: attachment;filename=diferencias inventario.xls");
 <body>
 <p class="hora">
 <?php
+
 	setlocale(LC_TIME, 'spanish');
 	date_default_timezone_set ('America/Argentina/Buenos_Aires');		
 	echo strftime ("%A, %d de %B de %Y - %H:%M hs.");
@@ -100,7 +97,7 @@ header("content-disposition: attachment;filename=diferencias inventario.xls");
 	} 
 	else 
 	{ 
-	echo "<p align='center'><strong>NO SE HA LEIDO NINGUN PAQUETE EN EL SECTOR QUE NO SE ENCUENTRE EN STOCK</strong></p>"; 
+	echo "<p align='center'><strong>NO SE HA LEIDO NINGUN PAQUETE EN EL SECTOR</strong></p>"; 
 	}
 	
 	// Para generar el PDF
