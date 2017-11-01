@@ -24,7 +24,7 @@ $_SESSION["anterior"]= $_POST['leeInv'];
 
 
 //busco el OEP leido si ya està en la BBDD del inventario
-$result = mysql_query("SELECT * FROM leido WHERE oepLEIDO LIKE '$leido%'", $con);
+$result = mysql_query("SELECT * FROM leido WHERE oepLEIDO like '$leido'", $con);
 
 //Verifico si ya fue cargado el OEP leido
 if ($row = mysql_fetch_array($result))
